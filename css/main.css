@@ -1,4 +1,9 @@
-body, html {
+body {
+	background-color: #F8F9F9;
+	height: 100%;
+}
+
+html {
 	background-color: #F8F9F9;
 	height: 100%;
 }
@@ -208,3 +213,103 @@ h3, h4 {
 .whenHover {
 	opacity: 100%;
 }
+
+.cart-wrapper {
+	max-height: 349px;
+	overflow: hidden;
+	transition: all 2s;
+	-webkit-transition: all 2s;
+}
+
+.cart-wrapper:hover {
+	overflow: overlay;
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 12px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+	background: transparent;
+  }
+
+  ul {
+	list-style: none;
+  }
+
+
+.loader {
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+	0%, 100% {
+	  opacity: 1;
+	}
+	50% {
+	  opacity: .5;
+	}
+  }
+
+  .lds-ellipsis {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+  }
+  .lds-ellipsis div {
+	position: absolute;
+	top: 33px;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background: #212529;
+	animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+	left: 8px;
+	animation: lds-ellipsis1 1s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+	left: 8px;
+	animation: lds-ellipsis2 1s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+	left: 32px;
+	animation: lds-ellipsis2 1s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+	left: 56px;
+	animation: lds-ellipsis3 1s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+	0% {
+	  transform: scale(0);
+	}
+	100% {
+	  transform: scale(1);
+	}
+  }
+  @keyframes lds-ellipsis3 {
+	0% {
+	  transform: scale(1);
+	}
+	100% {
+	  transform: scale(0);
+	}
+  }
+  @keyframes lds-ellipsis2 {
+	0% {
+	  transform: translate(0, 0);
+	}
+	100% {
+	  transform: translate(24px, 0);
+	}
+  }
+  

@@ -142,12 +142,128 @@
 					</div>
 					<!-- // Ролл -->
 
+					<!-- Ролл -->
+					<div class="col-md-6">
+						<div class="card mb-4" data-id="05">
+							<img class="product-img" src="img/roll/california-hit.jpg" alt="">
+							<div class="card-body text-center">
+								<h4 class="item-title">Калифорния хит ролл</h4>
+								<p><small data-items-in-box class="text-muted">6 шт.</small></p>
+
+								<div class="details-wrapper">
+									<div class="items counter-wrapper">
+										<div class="items__control" data-action="minus">-</div>
+										<div class="items__current" data-counter>1</div>
+										<div class="items__control" data-action="plus">+</div>
+									</div>
+
+									<div class="price">
+										<div class="price__weight">250г.</div>
+										<div class="price__currency">350 ₽</div>
+									</div>
+
+								</div>
+
+								<button data-cart type="button" class="btn btn-block btn-outline-warning">
+									+ в корзину
+								</button>
+
+							</div>
+						</div>
+					</div>
+					<!-- // Ролл -->
+
+					<!-- Ролл -->
+					<div class="col-md-6">
+						<div class="card mb-4" data-id="06">
+							<img class="product-img" src="img/roll/philadelphia.jpg" alt="">
+							<div class="card-body text-center">
+								<h4 class="item-title">Унаги</h4>
+								<p><small data-items-in-box class="text-muted">6 шт.</small></p>
+
+								<div class="details-wrapper">
+									<div class="items counter-wrapper">
+										<div class="items__control" data-action="minus">-</div>
+										<div class="items__current" data-counter>1</div>
+										<div class="items__control" data-action="plus">+</div>
+									</div>
+
+									<div class="price">
+										<div class="price__weight">210г.</div>
+										<div class="price__currency">350 ₽</div>
+									</div>
+
+								</div>
+
+								<button data-cart type="button" class="btn btn-block btn-outline-warning">
+									+ в корзину
+								</button>
+
+							</div>
+						</div>
+					</div>
+					<!-- // Ролл -->
+
+					<!-- Ролл -->
+					<div class="col-md-6">
+						<div class="card mb-4" data-id="07">
+							<img class="product-img" src="img/roll/philadelphia.jpg" alt="">
+							<div class="card-body text-center">
+								<h4 class="item-title">Лосось Рэд ролл</h4>
+								<p><small data-items-in-box class="text-muted">6 шт.</small></p>
+
+								<div class="details-wrapper">
+									<div class="items counter-wrapper">
+										<div class="items__control" data-action="minus">-</div>
+										<div class="items__current" data-counter>1</div>
+										<div class="items__control" data-action="plus">+</div>
+									</div>
+
+									<div class="price">
+										<div class="price__weight">200г.</div>
+										<div class="price__currency">330 ₽</div>
+									</div>
+								</div>
+
+								<button data-cart type="button" class="btn btn-block btn-outline-warning">+ в корзину</button>
+
+							</div>
+						</div>
+					</div>
+					<!-- // Ролл -->
+
 				</div>
 			</div>
 			<div class="col-md-4">
 
 				<!-- Корзина -->
 				<div class="card mb-4">
+
+					<!-- loader -->
+					<div id="loader" class="card-body border-top">
+						<div class="container text-center">
+							<div class="lds-ellipsis loader"><div></div><div></div><div></div><div></div></div>
+							<p class="loader h5">Вычесляем Ваш айпи...</p>
+						</div>
+					</div>
+					<!-- loader -->
+
+					<!-- Личный кабинет -->
+					<div id="profile-card" class="card-body border-top none">
+						<div class="container text-center">
+							<img src="./img/logo/icon.png" width="92" alt="profile photo">
+							<p class="h5">Добрый день, Дмитрий</p>
+						</div>
+						<div class="profile-menu">
+							<ul>
+								<li><a class="menu-item" id="history" href="">История заказов</a></li>
+								<li><a class="menu-item" id="settings" href="">Настройки</a></li>
+								<li><a class="menu-item" id="btn-out" href="">Выход</a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- Личный кабинет -->
+
 					<div class="card-body">
 						<h5 class="card-title">Ваш заказ</h4>
 						<div data-cart-empty class="alert alert-secondary" role="alert">
@@ -157,17 +273,17 @@
 						<div class="cart-wrapper">
 
 							<!-- Cart item -->
-							<div class="cart-item" data-id="02">
+							<!-- <div class="cart-item" data-id="02">
 								<div class="cart-item__top position-relative">
 									<div class="cart-item__img">
 										<img src="img/roll/california-tempura.jpg" alt="">
 									</div>
 									<div class="cart-item__desc">
 										<div class="cart-item__title">Калифорния темпура</div>
-										<div class="cart-item__weight">6 шт. / 205г.</div>
+										<div class="cart-item__weight">6 шт. / 205г.</div> -->
 										
 										<!-- cart-item__details -->
-										<div class="cart-item__details">
+										<!-- <div class="cart-item__details">
 
 											<div class="items items--small counter-wrapper">
 												<div class="items__control" data-action="minus">-</div>
@@ -179,15 +295,15 @@
 												<div class="price__currency">250 ₽</div>
 											</div>
 
-										</div>
+										</div> -->
 										<!-- // cart-item__details -->
 										
-									</div>
+									<!-- </div>
 									
 									<div class="item__delete unhover" data-action="delete">x</div>
 								</div>
 								
-							</div>
+							</div> -->
 							<!-- // Cart item -->
 
 						</div>
@@ -196,18 +312,52 @@
 						<!-- Стоимость заказа -->
 						<div class="cart-total">
 							<p><span class="h5">Доставка:</span> <span class="delivery-cost free">бесплатно</span> </p>
-							<p><span class="h5">Итого:</span> <span class="total-price">330</span> <span class="rouble">₽</span></p>
+							<p><span class="h5">Итого:</span> <span class="total-price">0</span> <span class="rouble">₽</span></p>
 						</div>
 						<!-- // Стоимость заказа -->
 
 					</div>
 
+					<!-- Приглашение войти -->
+					<div id="auth" class="card-body border-top none">
+						<div class="links">
+							<p><a class="h5" id="btn-in">Войдите</a> или <a class="h5" id="btn-up">Зарегистрируйтесь</a> чтобы совершить заказ</p>
+						</div>
+					</div>
+					<!-- Приглашение войти -->
+
+					<!-- Регистрация -->
+					<div id="signup-section" class="card-body border-top none">
+						<h5 class="card-title">Регистрация</h4>
+						<form id="signup-form" autocomplete="on">
+							<input id="signup-username" type="text" class="form-control" required placeholder="Username">
+							<input id="signup-password" type="password" class="form-control" required placeholder="Password">
+							
+							<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+						</form>
+						<div id="signup-error"></div>
+					</div>
+					<!-- Регистрация -->
+
+					<!-- Вход -->
+					<div id="signin-section" class="card-body border-top none">
+						<h5 class="card-title">Вход</h4>
+						<form id="login-form" autocomplete="on">
+							<input id="login-username" type="text" class="form-control" required placeholder="Username">
+							<input id="login-password" type="password" class="form-control" required placeholder="Password">
+							
+							<button type="submit" class="btn btn-primary">Войти</button>
+						</form>
+						<div id="login-error"></div>
+					</div>
+					<!-- Вход -->
+
 					<!-- Оформить заказ -->
-					<div id="order-form" class="card-body border-top">
-						<h5 class="card-title">Оформить заказ</h4>
-						<form>
+					<div id="order-form" class="card-body border-top none">
+						<h5 class="card-title">Оформление заказа</h4>
+						<form autocomplete="on">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Ваш номер телефона">
+								<input type="text" class="form-control" placeholder="Адрес">
 							</div>
 							<button type="submit" class="btn btn-primary">Заказать</button>
 						</form>
@@ -224,7 +374,11 @@
 
 	<!-- Подключаем скрипты -->
 
+	<script type="text/javascript" src="https://sdk.userbase.com/2/userbase.js"></script>
 	<script src="./js/counter.js"></script>
+	<script>
+		init();
+	</script>
 
 </body>
 

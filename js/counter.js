@@ -1,39 +1,39 @@
 //Get cart wrapper
 const cartWrapper = document.querySelector('.cart-wrapper');
 
-//Click listener for whole window
-window.addEventListener('click', clickHandler);
+//Register events
+function init () {
 
-hoverEvent();
-
-function hoverEvent() {
     const cartItem = cartWrapper.querySelectorAll('.cart-item');
 
+    //Click listener for whole window
+    window.addEventListener('click', clickHandler);
+
+    //Check for remaining items from last session
     if(cartItem) {
-        for (let i = 0; i < cartItem.length; i++) {
-            createDelete(cartItem[i]);
-        };   
+        for (item of cartItem) {
+
+            hoverDelete(item);
+        }
     }
+    
 };
 
-function createDelete (cartItem) {
+//
+function hoverDelete (item) {
 
-    const deleteBtn = cartItem.querySelector('[data-action="delete"]');
+    const deleteBtn = item.querySelector('[data-action="delete"]');
 
-    cartItem.addEventListener('mouseover', function () {
+    item.addEventListener('mouseover', function () {
 
         deleteBtn.classList.remove("unhover");
         deleteBtn.classList.add("whenHover");
     });
     
-    cartItem.addEventListener('mouseout', function () {
+    item.addEventListener('mouseout', function () {
 
         deleteBtn.classList.remove("whenHover");
         deleteBtn.classList.add("unhover");
-    });
-
-    deleteBtn.addEventListener('click', function(event) {
-        event.target.closest('.cart-item').remove();
     });
 
 };
@@ -51,8 +51,16 @@ function clickHandler (event) {
         counterHandler(event);
     } else if (event.target.dataset.action === 'delete') {
 
-
+        removeItem(event);
     }
+};
+
+//Remove item from card, calculate price
+function removeItem (event) {
+
+    event.target.closest('.cart-item').remove();
+    calculateTotal();
+    toggleCart();
 };
 
 //Increment or decrement counter on click
@@ -65,21 +73,45 @@ function counterHandler(event) {
     //Check if was clicked plus btn
     if (event.target.dataset.action === 'plus') {
     
-        //Chek if order not too big.
-        //Think that it more needed in shopping cart, so ill chnge it later
-        if(counter.innerHTML < 15) {
-            counter.innerHTML = ++counter.innerHTML;
-        } else {
-            alert('Woah! It seems that Your order needs a bit more of our attention. Let our manager get in touch with You');
+        counter.innerHTML = ++counter.innerHTML;
+
+        if (event.target.closest('.cart-wrapper')) {
+            calculateTotal();
         }
 
     //Check if was clicked minus btn
     } else if (event.target.dataset.action === 'minus') {
 
-        // Check if counter can be decremented (more than 1)
-        if(counter.innerHTML > 1) {
-        counter.innerHTML = --counter.innerHTML;
-        }
+        if (parseInt(counter.innerText) > 1) {
+
+            counter.innerHTML = --counter.innerHTML;
+
+            if (event.target.closest('.cart-wrapper')) {
+
+                calculateTotal();
+            }
+        
+        
+        } else if (parseInt(counter.innerText) === 1) {
+
+            if (event.target.closest('.cart-wrapper')) {
+
+                removeItem(event);
+            }
+        }        
+    }
+};
+
+function toggleCart() {
+
+    const lastItem = cartWrapper.querySelector('.cart-item');
+
+    if (lastItem) {
+
+    } else {
+        const form = document.getElementById('order-form');
+        form.classList.add('none');
+        document.querySelector('[data-cart-empty]').classList.remove('none');
     }
 };
 
@@ -109,7 +141,7 @@ function cartHandler(event) {
         //Get item counter
         const counterOfItem = itemInCart.querySelector('[data-counter]');
 
-        //Summerise counter
+        //Summarise counter
         counterOfItem.innerHTML = +productInfo.counter + +counterOfItem.innerHTML;
 
     //Create new item if product wasnt in cart     
@@ -148,12 +180,39 @@ function cartHandler(event) {
         //Append new product into cart
         cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
 
+        const form = document.getElementById('order-form');
+
+        
+
+        if (form.classList.contains('none')) {
+
+            form.classList.remove('none');
+            document.querySelector('[data-cart-empty]').classList.add('none');
+        }
+
         const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
-        createDelete (itemInCart);
+        hoverDelete (itemInCart);
     }
 
-
+    calculateTotal();
 
     card.querySelector('[data-counter]').innerHTML = 1;
 };
 
+function calculateTotal () {
+    let summ = 0;
+    const allCartItems = cartWrapper.querySelectorAll('.cart-item');
+
+    if (allCartItems) {
+
+        for (item of allCartItems) {
+            let price = parseInt(item.querySelector('.price__currency').innerText);
+            let amount = parseInt(item.querySelector('[data-counter]').innerText);
+            let subTotal = price * amount;
+            summ += subTotal;
+        }
+    
+        document.querySelector('.total-price').innerText = summ;
+    }
+    
+};
