@@ -189,10 +189,10 @@ h3, h4 {
 	display: none;
 }
 
-.item__delete {
+.popup__btn {
 	position: absolute;
 	top: 15px;
-	right: 0;
+	right: 5px;
 	border-radius: 4px;
 	font-family: 'Merriweather', serif;
 	font-size: 12px;
@@ -206,6 +206,15 @@ h3, h4 {
 	-webkit-transition: all 1s;
 }
 
+/* [data-action="delete"] {
+	top: 5px;
+	left: 5px;
+} */
+
+[data-action="close"] {
+	right: 5px;
+}
+
 .unhover {
 	opacity: 0;
 }
@@ -215,7 +224,7 @@ h3, h4 {
 }
 
 .cart-wrapper {
-	max-height: 349px;
+	max-height: 412px;
 	overflow: hidden;
 	transition: all 2s;
 	-webkit-transition: all 2s;
@@ -313,3 +322,13 @@ h3, h4 {
 	}
   }
   
+  .form-label {
+	margin-top: 0.5rem;
+	margin-bottom: 0.25rem;
+  }
+
+.menu-item {
+	display: block;
+	margin-top: 1rem;
+	cursor: pointer;
+}

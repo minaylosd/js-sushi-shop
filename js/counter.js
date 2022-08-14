@@ -3,39 +3,41 @@ const cartWrapper = document.querySelector('.cart-wrapper');
 
 //Register events
 function init () {
+    const removableElements = document.querySelectorAll('.removable');
 
-    const cartItem = cartWrapper.querySelectorAll('.cart-item');
+    document.getElementById('btn-in').addEventListener('click', showSignIn);
+    document.getElementById('btn-up').addEventListener('click', showSignUp);
+    document.getElementById('btn-out').addEventListener('click', handleSignOut);
+    // document.getElementById('purchase-form').addEventListener('submit', sendOrder);
 
     //Click listener for whole window
     window.addEventListener('click', clickHandler);
 
     //Check for remaining items from last session
-    if(cartItem) {
-        for (item of cartItem) {
+    for (let i = 0; i < removableElements.length; i++) {
 
-            hoverDelete(item);
-        }
+        hoverBtn (removableElements[i]);
     }
+    
     
 };
 
 //
-function hoverDelete (item) {
+function hoverBtn (removable) {
+    const popupBtn = removable.querySelector('.popup__btn');
 
-    const deleteBtn = item.querySelector('[data-action="delete"]');
-
-    item.addEventListener('mouseover', function () {
-
-        deleteBtn.classList.remove("unhover");
-        deleteBtn.classList.add("whenHover");
-    });
+    removable.addEventListener('mouseover', function () {
+        
     
-    item.addEventListener('mouseout', function () {
+        popupBtn.classList.remove("unhover");
+        popupBtn.classList.add("whenHover");
+    }); 
+    
+    removable.addEventListener('mouseout', function () {
 
-        deleteBtn.classList.remove("whenHover");
-        deleteBtn.classList.add("unhover");
+        popupBtn.classList.remove("whenHover");
+        popupBtn.classList.add("unhover");
     });
-
 };
 
 function clickHandler (event) {
@@ -52,6 +54,10 @@ function clickHandler (event) {
     } else if (event.target.dataset.action === 'delete') {
 
         removeItem(event);
+    } else if (event.target.dataset.action === 'close') {
+
+        event.target.closest('.removable').classList.add('none');
+        showAuth(event);
     }
 };
 
@@ -147,8 +153,9 @@ function cartHandler(event) {
     //Create new item if product wasnt in cart     
     } else {
 
+        let cartContent = cartWrapper.childNodes.length;
         //Const to append product information
-        const cartItemHTML = `<div class="cart-item" data-id="${productInfo.id}">
+        const cartItemHTML = `<div class="cart-item removable" data-id="${productInfo.id}">
                                 <div class="cart-item__top position-relative">
                                     <div class="cart-item__img">
                                         <img src="${productInfo.imgSrc}" alt="">
@@ -173,7 +180,7 @@ function cartHandler(event) {
                                         </div>
                                         <!-- // cart-item__details -->
                                     </div>
-                                    <div class="item__delete unhover" data-action="delete">x</div>
+                                    <div class="popup__btn unhover" data-action="delete">x</div>
                                 </div>
                             </div>`;
 
@@ -181,17 +188,18 @@ function cartHandler(event) {
         cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
 
         const form = document.getElementById('order-form');
-
+        const profile = document.getElementById('profile-card');
         
 
-        if (form.classList.contains('none')) {
-
-            form.classList.remove('none');
+        if (cartContent == 0) {
             document.querySelector('[data-cart-empty]').classList.add('none');
-        }
+            if ( !profile.classList.contains('none') && form.classList.contains('none') ) {
+                form.classList.contains('none');
+            }
+        };
 
         const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
-        hoverDelete (itemInCart);
+        hoverBtn (itemInCart);
     }
 
     calculateTotal();
@@ -215,4 +223,23 @@ function calculateTotal () {
         document.querySelector('.total-price').innerText = summ;
     }
     
+};
+
+function showAuth () {
+    document.getElementById('auth').classList.remove('none');
+
+};
+
+function showSignIn() {
+    document.getElementById('signin-section').classList.remove('none');
+    document.getElementById('auth').classList.add('none');
+
+    document.getElementById('login-form').addEventListener('submit', handleLogin)
+};
+
+function showSignUp() {
+    document.getElementById('signup-section').classList.remove('none');
+    document.getElementById('auth').classList.add('none');
+
+    document.getElementById('signup-form').addEventListener('submit', handleRegister)
 };
