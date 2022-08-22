@@ -8,7 +8,7 @@ function init () {
     document.getElementById('btn-in').addEventListener('click', showSignIn);
     document.getElementById('btn-up').addEventListener('click', showSignUp);
     document.getElementById('btn-out').addEventListener('click', handleSignOut);
-    // document.getElementById('purchase-form').addEventListener('submit', sendOrder);
+    // document.getElementById('purchase-form').addEventListener('submit', orderBtn);
 
     //Click listener for whole window
     window.addEventListener('click', clickHandler);
@@ -121,22 +121,37 @@ function toggleCart() {
     }
 };
 
+function getProductInfo (item) {
+    const productInfo = {
+        id: item.dataset.id,
+        imgSrc: item.querySelector('.product-img').getAttribute('src'),
+        title: item.querySelector('.item-title').innerText,
+        itemsInBox: item.querySelector('[data-items-in-box]').innerText,
+        weight: item.querySelector('.price__weight').innerText,
+        price: item.querySelector('.price__currency').innerText,
+        counter: item.querySelector('[data-counter]').innerText,
+
+    };
+    return productInfo;
+};
+
 function cartHandler(event) {
 
     //Get card container
     const card = event.target.closest('.card');
 
     //Save product data as object
-    const productInfo = {
-        id: card.dataset.id,
-        imgSrc: card.querySelector('.product-img').getAttribute('src'),
-        title: card.querySelector('.item-title').innerText,
-        itemsInBox: card.querySelector('[data-items-in-box]').innerText,
-        weight: card.querySelector('.price__weight').innerText,
-        price: card.querySelector('.price__currency').innerText,
-        counter: card.querySelector('[data-counter]').innerText,
+    const productInfo = getProductInfo (card);
+    // const productInfo = {
+    //     id: card.dataset.id,
+    //     imgSrc: card.querySelector('.product-img').getAttribute('src'),
+    //     title: card.querySelector('.item-title').innerText,
+    //     itemsInBox: card.querySelector('[data-items-in-box]').innerText,
+    //     weight: card.querySelector('.price__weight').innerText,
+    //     price: card.querySelector('.price__currency').innerText,
+    //     counter: card.querySelector('[data-counter]').innerText,
 
-    };
+    // };
 
     //Check if currentproduct is already placed in cart
     const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
@@ -193,9 +208,7 @@ function cartHandler(event) {
 
         if (cartContent == 0) {
             document.querySelector('[data-cart-empty]').classList.add('none');
-            if ( !profile.classList.contains('none') && form.classList.contains('none') ) {
-                form.classList.contains('none');
-            }
+            form.classList.remove('none'); 
         };
 
         const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);

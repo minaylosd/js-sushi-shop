@@ -7,6 +7,52 @@ function database() {
    
 
 function showProfile (user) {
+
+    // function database() {
+    //     userbase.openDatabase({
+    //     databaseName: `orders`, changeHandler: function () {
+    //     console.log('good')}
+    //         .then(() => {let obj = { timeone: 'nnn', two2: 'xxx', free: true, six: { six: 'fff', inner: true, crazy: 'strange'}};
+        
+    //     userbase.insertItem({
+    //     databaseName: 'example-database-name',
+    //     item: {obj}
+    //         }).then(() => {
+    //       // item inserted
+    //     }).catch((e) => console.error(e))
+                
+    //         })
+        
+        
+    //     });
+    //     }
+        
+    //     database();
+
+    // userbase.openDatabase({
+    //     databaseName: 'commonBase',
+    //     commonBasechange: function (items) {
+            
+    
+    //       console.log('New order posted!')
+    //     }
+    //   }).then((items) => {
+    //     let commonOrderNum = items.length + 1;
+        
+    //   }).catch((e) => console.error(e))
+
+      userbase.openDatabase({
+        databaseName: `${user.usename} orders`,
+        changeHandler: function (items) {
+          console.log('New order posted!')
+        }
+      }).then((items) => {
+        let orderNum = items.length + 1;
+        
+      }).catch((e) => console.error(e))
+    
+    //   checkCurrentOrder();
+
     const profile = document.getElementById('profile-card');
     const greeting =  profile.querySelector('.h5');
     const form = document.getElementById('order-form');
@@ -25,6 +71,7 @@ function showProfile (user) {
 
     greeting.appendChild(name);
     profile.classList.remove('none');
+
 
     if ( !!user.profile.homeAddress ) {
         document.getElementById('address').value = user.profile.addresses.homeAddress;
@@ -97,4 +144,97 @@ function handleSignOut(e) {
 
 
 
-// function sendOrder ()
+function orderBtn (e, orderNum) {
+    e.preventDefault();
+
+    
+
+    checkAddress(user);
+    getOrderData(orderNum);
+    createOrder();
+    sendOrder();
+
+    
+    
+    
+      
+    
+    
+
+
+    
+
+  
+
+
+    //Get your unpaid cart
+    //..
+    //...
+};
+
+function getOrderData (orderNum) {
+    const cart = document.querySelector('.cart-wrapper');
+    const cartItems = cart.querySelectorAll('.cart-item');
+
+    const dates = new function() {
+        this.orderDate = Date.now();
+        this.deliverDate = this.orderDate + 1 * 60 * 60 * 1000;
+    };
+    
+    c
+    
+
+    let orderItems = {};
+
+    for (let i = 0; i < cartItems.length; i++) {
+        let food = new function() {
+            this
+        }
+        let counter = this.querySelector('[data-counter]').innerText;
+        let positionId = this.dataset.id;
+        let dataPair = {
+            positionId :  counter};
+            let newItems = Object.assign(items, dataPair);
+
+    }
+
+    return Object.assign(orderArray, items);
+};
+
+
+// function openUsersDatabase (user) {
+//     userbase.openDatabase({
+//         databaseName: `${user.usename} orders`,
+//         changeHandler: function (items) {
+//             // update your application state with the database items
+//         }
+//     }).catch((e) => document.getElementById('db-error').innerText = e)
+    
+// };
+
+// function changeHandler(items) {
+
+
+
+// };
+
+function checkAddress(user) {
+
+    let orderAddress = document.getElementById('address').value;
+
+    if (orderAddress != user.profile.primaryAddress) {
+        let saveAddress = confirm('Хотите сохранить этот адрес?');
+        if (saveAddress) {
+            updateUserAddress(user, orderAddress);
+        } 
+    }
+
+};
+
+function updateUserAddress (user, orderAddress) {
+    userbase.updateUser({
+        profile: { primaryAddress : `${orderAddress}`}
+      }).then(() => {
+        // user account updated
+      }).catch((e) => console.error(e))
+}
